@@ -16,7 +16,8 @@ defmodule Gold.Transaction do
              :time,
              :timereceived,
              :comment,
-             :otheraccount]
+             :otheraccount,
+             :details]
 
   @doc """
   Creates Transaction struct from JSON transaction object.
@@ -41,7 +42,8 @@ defmodule Gold.Transaction do
       time:          Map.fetch!(tx, "time"),
       timereceived:  Map.fetch!(tx, "timereceived"),
       comment:       Map.get(tx, "comment", nil),
-      otheraccount:  Map.get(tx, "otheraccount", nil)
+      otheraccount:  Map.get(tx, "otheraccount", nil),
+      details:       Map.get(tx, "details", nil) |> Enum.map(&Gold.TransactionDetails.from_json/1)
     }
   end
 
