@@ -191,6 +191,54 @@ defmodule Gold do
   end
   
   @doc """
+  https://bitcoin.org/en/developer-reference#createrawtransaction
+  """
+  def createrawtransaction(name, inputs, addresses) do
+    call(name, {:createrawtransaction, [inputs, addresses]})
+  end
+
+  def createrawtransaction!(name, inputs, addresses) do
+    {:ok, tx} = createrawtransaction(name, inputs, addresses)
+    tx
+  end
+
+  @doc """
+  https://bitcoin.org/en/developer-reference#fundrawtransaction
+  """
+  def fundrawtransaction(name, tx_hex) do
+    call(name, {:fundrawtransaction, [tx_hex]})
+  end
+
+  def fundrawtransaction!(name, tx_hex) do
+    {:ok, tx} = fundrawtransaction(name, tx_hex)
+    tx
+  end
+
+  @doc """
+  https://bitcoin.org/en/developer-reference#signrawtransaction
+  """
+  def signrawtransaction(name, tx_hex) do
+    call(name, {:signrawtransaction, [tx_hex]})
+  end
+
+  def signrawtransaction!(name, tx_hex) do
+    {:ok, tx} = signrawtransaction(name, tx_hex)
+    tx
+  end
+
+  @doc """
+  https://bitcoin.org/en/developer-reference#sendrawtransaction
+  """
+  def sendrawtransaction(name, tx_hex) do
+    call(name, {:sendrawtransaction, [tx_hex]})
+  end
+
+  def sendrawtransaction!(name, tx_hex) do
+    {:ok, tx} = sendrawtransaction(name, tx_hex)
+    tx
+  end
+
+  @doc """
   https://bitcoin.org/en/developer-reference#validateaddress
   """
   def validateaddress(name, address) do
@@ -199,6 +247,18 @@ defmodule Gold do
 
   def validateaddress!(name, address) do
     {:ok, tx} = validateaddress(name, address)
+    tx
+  end
+
+  @doc """
+  https://bitcoin.org/en/developer-reference#sendmany
+  """
+  def sendmany(name, account, addresses, confirmations, comment, fee_addresses) do
+    call(name, {:sendmany, [account, addresses, confirmations, comment, fee_addresses]})
+  end
+
+  def sendmany!(name, account, addresses, confirmations, comment, fee_addresses) do
+    {:ok, tx} = sendmany(name, account, addresses, confirmations, comment, fee_addresses)
     tx
   end
 
