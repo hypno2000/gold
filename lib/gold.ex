@@ -177,7 +177,7 @@ defmodule Gold do
     {:ok, blockhash} = getblockhash(name, index)
     blockhash
   end
-
+  
   @doc """
   https://bitcoin.org/en/developer-reference#getrawtransaction
   """
@@ -187,6 +187,18 @@ defmodule Gold do
 
   def getrawtransaction!(name, txid, verbose \\ 1) do
     {:ok, tx} = getrawtransaction(name, txid, verbose)
+    tx
+  end
+  
+  @doc """
+  https://bitcoin.org/en/developer-reference#validateaddress
+  """
+  def validateaddress(name, address) do
+    call(name, {:validateaddress, [address]})
+  end
+
+  def validateaddress!(name, address) do
+    {:ok, tx} = validateaddress(name, address)
     tx
   end
 
