@@ -205,12 +205,12 @@ defmodule Gold do
   @doc """
   https://bitcoin.org/en/developer-reference#fundrawtransaction
   """
-  def fundrawtransaction(name, tx_hex) do
-    call(name, {:fundrawtransaction, [tx_hex]})
+  def fundrawtransaction(name, tx_hex, options) do
+    call(name, {:fundrawtransaction, [tx_hex, options]})
   end
 
-  def fundrawtransaction!(name, tx_hex) do
-    {:ok, tx} = fundrawtransaction(name, tx_hex)
+  def fundrawtransaction!(name, tx_hex, options) do
+    {:ok, tx} = fundrawtransaction(name, tx_hex, options)
     tx
   end
 
