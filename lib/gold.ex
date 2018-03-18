@@ -254,7 +254,14 @@ defmodule Gold do
   https://bitcoin.org/en/developer-reference#sendmany
   """
   def sendmany(name, account, addresses, confirmations, comment, fee_addresses) do
-    call(name, {:sendmany, [account, addresses, confirmations, comment, fee_addresses]})
+    case load_config(name) do
+      :undefined ->
+        {:error, {:invalid_configuration, name}}
+      %{dash_mode: true} ->
+        call(name, {:sendmany, [account, addresses, confirmations, false, comment, fee_addresses]})
+      _ ->
+        call(name, {:sendmany, [account, addresses, confirmations, comment, fee_addresses]})
+    end
   end
 
   def sendmany!(name, account, addresses, confirmations, comment, fee_addresses) do
