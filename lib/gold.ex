@@ -358,15 +358,15 @@ defmodule Gold do
         %{"error" => nil, "result" => result} = Poison.decode!(body)
         {:ok, result}
       {:ok, %{status_code: code, body: body}} ->
-        handle_error(code, body)
+        handle_error(method, params, code, body)
     end
   end
 
   @statuses %{401 => :forbidden, 404 => :notfound, 500 => :internal_server_error}
 
-  defp handle_error(status_code, error) do
+  defp handle_error(method, params, status_code, error) do
     status = @statuses[status_code]
-    Logger.debug "Bitcoin RPC error status #{status}: #{error}"
+    Logger.debug "Bitcoin RPC error for method: #{method}, params: #{inspect params}, status #{status}: #{error}"
     case Poison.decode(error) do
       {:ok, %{"error" => %{"message" => message}}} ->
         {:error, %{status: status, error: message}}
