@@ -2,9 +2,9 @@ use Mix.Config
 
 config :gold, :regtest, [
   hostname: "localhost",
-  port: 8332,
+  port: 18332,
   user: "bitcoinrpc",
-  password: "changeme"
+  password: "bitcoinrpc"
 ]
 
 config :logger, level: :warn

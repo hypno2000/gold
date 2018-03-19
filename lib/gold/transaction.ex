@@ -43,7 +43,7 @@ defmodule Gold.Transaction do
       timereceived:  Map.fetch!(tx, "timereceived"),
       comment:       Map.get(tx, "comment", nil),
       otheraccount:  Map.get(tx, "otheraccount", nil),
-      details:       Map.get(tx, "details", nil) |> Enum.map(&Gold.TransactionDetails.from_json/1)
+      details:       Map.get(tx, "details", []) |> Enum.map(&Gold.TransactionDetails.from_json/1)
     }
   end
 
